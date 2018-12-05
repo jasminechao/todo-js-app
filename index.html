@@ -10,12 +10,41 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous"
     />
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Jasmine's Todo App</h1>
-        <button class="btn btn-primary">Display Todos</button>
-        <button class="btn btn-Info">Toggle All</button>
+      <h1>Jasmine's Todo App</h1>
+      <div class="row">
+        <button
+          id="displayButton"
+          onClick="handlers.displayTodos();"
+          class="btn btn-primary"
+        >
+          Display Todos
+        </button>
+        <button
+          id="toggleButton"
+          onClick="handlers.toggleAll();"
+          class="btn btn-Info"
+        >
+          Toggle All
+        </button>
+      </div>
+      <div class="row">
+        <input id="todoInput" type="text" />
+        <button
+          id="addButton"
+          onClick="handlers.addTodos();"
+          class="btn btn-warning"
+        >
+          Add Todo
+        </button>
+      </div>
+    </div>
+    <div class="container">
+        <ul id="todo-list">
+
+        </ul>
     </div>
     <script src="index.js"></script>
   </body>
