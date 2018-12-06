@@ -25,10 +25,8 @@ let todoList = {
       let todosUl = document.getElementById("todo-list");
       todosUl.innerHTML = "";
       for (let i = 0; i < this.todos.length; i++) {
-        let todoLi = document.createElement("li");
-
-        let todoGroup = document.createElement("div");
-        todoGroup.className = "form-check";
+        let todoGroup = document.createElement("li");
+        todoGroup.id = i;
         let label = document.createElement("label");
         label.innerHTML = this.todos[i].todoText;
         let checkbox = document.createElement("input");
@@ -37,8 +35,17 @@ let todoList = {
         checkbox.className = "form-check-input";
         checkbox.checked = this.todos[i].completed;
 
+        let deleteSpan = document.createElement("span");
+        deleteLink = document.createElement("a");
+        deleteLink.className = "deleteLink";
+        deleteIcon = document.createElement("i");
+        deleteIcon.className = " fas fa-trash";
+        deleteLink.appendChild(deleteIcon);
+        deleteSpan.appendChild(deleteLink);
+
         label.prepend(checkbox);
         todoGroup.appendChild(label);
+        todoGroup.appendChild(deleteSpan);
 
         todosUl.appendChild(todoGroup);
       }
@@ -125,16 +132,24 @@ let handlers = {
 
     let todoText = todoInput.value;
     todoList.addTodos(todoText);
-    // if (todoInput.classList.contains("hidden")) {
-    //   todoInput.classList.remove("hidden");
-    //   let todoText = todoInput.value;
-    //   addButton.addEventListener("click", function() {
-    //     todoList.addTodos(todoText);
-    //   });
-    // }
   }
 };
 
 window.onload = function() {
   todoList.displayTodos();
 };
+
+let doDeleteTodos = document.querySelectorAll("deleteLink");
+doDeleteTodos.forEach(function(element) {
+  element.addEventListener("click", function(e) {
+    console.log(e.target.parentNode.id);
+    // const index =
+    // deleteTodos(position);
+  });
+});
+
+let findTodoList = document.getElementById("todo-list");
+findTodoList.addEventListener("click", function(e) {
+    let position = e.target.closest("li").id;
+    todoList.deleteTodos(position);
+})

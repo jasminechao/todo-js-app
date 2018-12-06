@@ -13,3 +13,11 @@ ul {
 ul .form-check-input {
   margin-right: 15px;
 }
+
+i {
+  font-family: fontawesome !important;
+  font-style: normal;
+  font-size: 1em;
+  padding-left: 10px;
+  z-index: 10;
+}
