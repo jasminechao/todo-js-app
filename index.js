@@ -25,8 +25,8 @@ let todoList = {
       let todosUl = document.getElementById("todo-list");
       todosUl.innerHTML = "";
       for (let i = 0; i < this.todos.length; i++) {
-        let todoGroup = document.createElement("li");
-        todoGroup.id = i;
+        let todoItem = document.createElement("li");
+        todoItem.id = i;
         let label = document.createElement("label");
         label.innerHTML = this.todos[i].todoText;
         let checkbox = document.createElement("input");
@@ -39,15 +39,23 @@ let todoList = {
         deleteLink = document.createElement("a");
         deleteLink.className = "deleteLink";
         deleteIcon = document.createElement("i");
-        deleteIcon.className = " fas fa-trash";
+        deleteIcon.className = "fas fa-trash";
         deleteLink.appendChild(deleteIcon);
         deleteSpan.appendChild(deleteLink);
 
-        label.prepend(checkbox);
-        todoGroup.appendChild(label);
-        todoGroup.appendChild(deleteSpan);
+        let editSpan = document.createElement("span");
+        editLink = document.createElement("a");
+        editLink.className = "editLink";
+        editIcon = document.createElement("i");
+        editIcon.className = "fas fa-pencil";
+        editLink.appendChild(editIcon);
+        editSpan.appendChild(editLink);
 
-        todosUl.appendChild(todoGroup);
+        label.prepend(checkbox);
+        todoItem.appendChild(label);
+        todoItem.appendChild(deleteSpan).append(editSpan);
+
+        todosUl.appendChild(todoItem);
       }
     }
   },
@@ -139,17 +147,29 @@ window.onload = function() {
   todoList.displayTodos();
 };
 
-let doDeleteTodos = document.querySelectorAll("deleteLink");
-doDeleteTodos.forEach(function(element) {
-  element.addEventListener("click", function(e) {
-    console.log(e.target.parentNode.id);
-    // const index =
-    // deleteTodos(position);
-  });
-});
-
-let findTodoList = document.getElementById("todo-list");
-findTodoList.addEventListener("click", function(e) {
-    let position = e.target.closest("li").id;
+document.addEventListener("click", function(e) {
+  let position = e.target.closest("li").id;
+  if (e.target.className === "fas fa-trash") {
     todoList.deleteTodos(position);
-})
+  }
+  if (e.target.className === "fas fa-pencil") {
+    let todoItem = e.target.closest("li");
+    let editTodoInput = document.createElement("input");
+    editTodoInput.id = "editTodoInput";
+    editTodoInput.type = "text";
+
+    let updateButton = document.createElement("button");
+    updateButton.innerHTML = "Update";
+    updateButton.className = "btn btn-secondary";
+
+    todoItem.append(editTodoInput);
+    todoItem.append(updateButton);
+
+    updateButton.addEventListener("click", function() {
+      let editTodoText = document.getElementById("editTodoInput");
+      let newTodoText = editTodoText.value;
+      todoList.changeTodos(position, newTodoText);
+    });
+
+  }
+});
