@@ -1,20 +1,20 @@
-var todoList = {
+let todoList = {
   todos: [
     {
-      todoText: "item 1",
+      todoText: "Buy oatmilk",
       completed: false
     },
     {
-      todoText: "item 2",
+      todoText: "Change bike tires",
+      completed: false
+    },
+    {
+      todoText: "Prep sourdough bread",
+      completed: false
+    },
+    {
+      todoText: "Build js todo app",
       completed: true
-    },
-    {
-      todoText: "item 3",
-      completed: false
-    },
-    {
-      todoText: "item 4",
-      completed: false
     }
   ],
 
@@ -22,14 +22,25 @@ var todoList = {
     if (this.todos.length === 0) {
       console.log("Empty list");
     } else {
+      let todosUl = document.getElementById("todo-list");
+      todosUl.innerHTML = "";
       for (let i = 0; i < this.todos.length; i++) {
-        let todosUl = document.getElementById("todo-list");
         let todoLi = document.createElement("li");
 
-        todoLi.textContent =
-          this.todos[i].todoText + ", completed: " + this.todos[i].completed;
+        let todoGroup = document.createElement("div");
+        todoGroup.className = "form-check";
+        let label = document.createElement("label");
+        label.innerHTML = this.todos[i].todoText;
+        let checkbox = document.createElement("input");
 
-        todosUl.appendChild(todoLi);
+        checkbox.type = "checkbox";
+        checkbox.className = "form-check-input";
+        checkbox.checked = this.todos[i].completed;
+
+        label.prepend(checkbox);
+        todoGroup.appendChild(label);
+
+        todosUl.appendChild(todoGroup);
       }
     }
   },
@@ -122,4 +133,8 @@ let handlers = {
     //   });
     // }
   }
+};
+
+window.onload = function() {
+  todoList.displayTodos();
 };

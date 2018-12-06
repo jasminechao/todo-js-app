@@ -1,0 +1,15 @@
+.spaced {
+  margin: 2% 4%;
+}
+
+.left-margin {
+  margin-left: 4%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul .form-check-input {
+  margin-right: 15px;
+}

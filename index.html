@@ -10,27 +10,39 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Jasmine's Todo App</h1>
-      <div class="row">
-        <button
-          id="displayButton"
-          onClick="handlers.displayTodos();"
-          class="btn btn-primary"
-        >
-          Display Todos
-        </button>
+    <div class="container spaced">
+      <div class="header">
+        <h1>Jasmine's Todo App</h1>
         <button
           id="toggleButton"
           onClick="handlers.toggleAll();"
-          class="btn btn-Info"
+          class="btn btn-Info left-margin"
         >
           Toggle All
         </button>
       </div>
-      <div class="row">
+    </div>
+    <div class="container spaced">
+      <ul id="todo-list">
+        <li>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="defaultCheck1"
+            />
+            <label class="form-check-label" for="defaultCheck1">
+              Default checkbox
+            </label>
+          </div>
+          Text here
+        </li>
+      </ul>
+      <div class="left-margin">
         <input id="todoInput" type="text" />
         <button
           id="addButton"
@@ -39,12 +51,7 @@
         >
           Add Todo
         </button>
-      </div>
     </div>
-    <div class="container">
-        <ul id="todo-list">
-
-        </ul>
     </div>
     <script src="index.js"></script>
   </body>
